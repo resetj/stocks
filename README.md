@@ -9,3 +9,5 @@ git add .\xxx
 
 git commit -m "说明"
 
+git push origin master
+
