@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+__author__ = 'cx'
 import sys, urllib, urllib2, json
 import datetime
 
-def checkWorkingDay(data):
+def CheckWorkingDay(data):
     #http://apistore.baidu.com.cn/apiworks/servicedetail/1116.html
     url = 'http://apis.baidu.com/xiaogg/holiday/holiday?d=' + str(data)
     req = urllib2.Request(url)
@@ -17,18 +18,18 @@ def checkWorkingDay(data):
         else:
             return False
 
-def checkWorkingTime(time):
+def CheckWorkingTime(time):
     if (("091500" <= time and "113000" >= time) or\
         ("130000" <= time and "150000" >= time)):
         return True
     else:
         return False
 
-def isValidTime():
-    return checkWorkingDay(datetime.datetime.now().strftime("%Y%m%d")) and\
-           checkWorkingTime(datetime.datetime.now().strftime("%H%M%S"))
+def IsValidTime():
+    return CheckWorkingDay(datetime.datetime.now().strftime("%Y%m%d")) and\
+           CheckWorkingTime(datetime.datetime.now().strftime("%H%M%S"))
 
-print(isValidTime())
+#print(IsValidTime())
 #print(checkWorkingDay("20161015"))
 #print(checkWorkingTime("091000"))
 
