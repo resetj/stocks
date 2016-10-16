@@ -2,5 +2,5 @@
 __author__ = 'cx'
 
 class MatchClass:
-	
+	a = 1
 
