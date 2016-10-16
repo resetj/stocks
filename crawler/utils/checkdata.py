@@ -29,9 +29,14 @@ def IsValidTime():
     return CheckWorkingDay(datetime.datetime.now().strftime("%Y%m%d")) and\
            CheckWorkingTime(datetime.datetime.now().strftime("%H%M%S"))
 
-#print(IsValidTime())
-#print(checkWorkingDay("20161015"))
-#print(checkWorkingTime("091000"))
+def IsValidDay():
+    return CheckWorkingDay(datetime.datetime.now().strftime("%Y%m%d"))
+
+
+# print(IsValidTime())
+# print(IsValidDay())
+# print(checkWorkingDay("20161015"))
+# print(checkWorkingTime("091000"))
 
 
 
