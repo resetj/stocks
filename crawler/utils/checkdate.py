@@ -3,6 +3,7 @@ __author__ = 'cx'
 import sys, urllib, urllib2, json
 import datetime
 
+
 def CheckWorkingDay(data):
     #http://apistore.baidu.com.cn/apiworks/servicedetail/1116.html
     url = 'http://apis.baidu.com/xiaogg/holiday/holiday?d=' + str(data)

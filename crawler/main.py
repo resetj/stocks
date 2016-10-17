@@ -3,13 +3,15 @@ __author__ = 'cx'
 
 import urllib
 import urllib2
-import sys 
+import sys
+import datetime
 
 
 from settings import *
-from match import *
-from utils.checkdata import *
+
+from utils.checkdate import *
 from utils.fileutils import *
+from utils.match import *
 
 class ThrowOut(Exception):
     def __init__(self, msg):
@@ -17,15 +19,26 @@ class ThrowOut(Exception):
 
 def main():
 
-    print(IsValidTime())
-    settingsModule = SettingsClass()
-    print settingsModule.urlShangzhengA
+    if IsValidDay():
 
-    # url = "http://nufm.dfcfw.com/EM_Finance2014NumericApplication/JS.aspx?type=CT&cmd=C._SZAME&sty=FCOIATA&sortType=C&sortRule=-1&page=1&pageSize=100000&js=var%20quote_123%3d{rank:[(x)],pages:(pc)}&token=7bc05d0d4c3c22ef9fca8c2a912d779c"
-    # req = urllib2.Request(url)
-    # response = urllib2.urlopen(req)
-    # responseData = response.read()
-    # print responseData
+        settingsModule = SettingsClass()
+        settingsModule.SetDataDir(CreateFileEnv())
+        # 下面是获取上证A股的列表
+        req = urllib2.Request(settingsModule.urlShangzhengA)
+        response = urllib2.urlopen(req)
+        responseData = response.read()
+        jsonData = MatchList(responseData)
+        SaveStrToFile(settingsModule.dataDir, "shangzhengA.txt", jsonData)
+        rank = "rank"
+        pages = "pages"
+        rankList = eval(jsonData).get("rank")
+
+        print rankList[1]
+
+
+
+
+        # 下面是获取沪深A股的列表
 
 
 

@@ -8,9 +8,9 @@ class SettingsClass:
 	hushengA = "http://nufm.dfcfw.com/EM_Finance2014NumericApplication/JS.aspx?type=CT&cmd=C._SZAME&sty=FCOIATA&sortType=C&sortRule=-1&page=1&pageSize=100000&js=var%%20quote_123%%3d{rank:[(x)],pages:(pc)}&token=%s"
 	singleTransaction = "http://hqdigi2.eastmoney.com/EM_Quote2010NumericApplication/CompatiblePage.aspx?Type=OB&stk=%d&Reference=xml&limit=0&page=%d"
 
-	urlShangzhengA = shangzhengA % token
-	urlHushengA = hushengA % token
+	def __init__(self):
+		self.urlShangzhengA = self.shangzhengA % self.token
+		self.urlHushengA = self.hushengA % self.token
 
-	# def __init__(self):
-	#     self.urlShangzhengA = shangzhengA % token
-
+	def SetDataDir(self,dir):
+		self.dataDir = dir
