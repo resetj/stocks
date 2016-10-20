@@ -5,9 +5,11 @@ import urllib
 import urllib2
 import sys
 import datetime
+from Queue import Queue
 
 
 from settings import *
+from threads import *
 
 from utils.checkdate import *
 from utils.fileutils import *
@@ -24,6 +26,7 @@ def main():
         settingsModule = SettingsClass()
         settingsModule.SetDataDir(CreateFileEnv())
         # 下面是获取上证A股的列表
+        print "url:%s\n" % settingsModule.urlShangzhengA
         req = urllib2.Request(settingsModule.urlShangzhengA)
         response = urllib2.urlopen(req)
         responseData = response.read()
@@ -33,9 +36,22 @@ def main():
         pages = "pages"
         rankList = eval(jsonData).get("rank")
 
-        print rankList[1]
+        queueStocks = Queue()
+        for stock in rankList:
+            stockList = stock.split(",")
+            queueStocks.put(int(stockList[1]))
 
+        thread_list = list()
+        maxThreadNum = 100
+        for i in range(maxThreadNum):
+            consumer = ConsumerClass("Consumer" + str(i), queueStocks)
+            consumer.start()
+            thread_list.append(consumer)
 
+        for thread in thread_list:
+            thread.join()
+
+        print "All has done!\n"
 
 
         # 下面是获取沪深A股的列表
